@@ -25,21 +25,29 @@ public class ProductServiceController {
       Product honey = new Product();
       honey.setId("1");
       honey.setName("Honey");
+      honey.setQty("1");
+      honey.setPrice("Rp. 20000");
       productRepo.put(honey.getId(), honey);
       
       Product almond = new Product();
       almond.setId("2");
       almond.setName("Almond");
+      almond.setQty("1");
+      almond.setPrice("Rp. 15000");
       productRepo.put(almond.getId(), almond);
       
       Product chocolate = new Product();
       chocolate.setId("3");
       chocolate.setName("Chocolate");
+      chocolate.setQty("1");
+      chocolate.setPrice("12000");
       productRepo.put(chocolate.getId(), chocolate);
       
       Product milk = new Product();
       milk.setId("4");
       milk.setName("Milk");
+      milk.setQty("1");
+      milk.setPrice("6000");
       productRepo.put(milk.getId(), milk);
    }
    
