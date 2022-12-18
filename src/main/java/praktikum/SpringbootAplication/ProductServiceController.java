@@ -4,6 +4,7 @@
  */
 package praktikum.SpringbootAplication;
 
+import model.Product;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -51,18 +52,23 @@ public class ProductServiceController {
       productRepo.put(milk.getId(), milk);
    }
    
+   // DElETE API (method untuk menghapus produk) 
    @RequestMapping(value = "/products/{id}", method = RequestMethod.DELETE)
    public ResponseEntity<Object> delete(@PathVariable("id") String id) { 
       productRepo.remove(id);
       return new ResponseEntity<>("Product is deleted successsfully", HttpStatus.OK);
    }
    
+   // PUT API (method untuk mengcreate pruduk)
    @RequestMapping(value = "/products/{id}", method = RequestMethod.PUT)
    public ResponseEntity<Object> updateProduct(@PathVariable("id") String id, @RequestBody Product product) { 
-     
+       
+       // validasi ID 
        if(!productRepo.containsKey(id)){
             return new ResponseEntity<>("Product id not found, please check again", HttpStatus.NOT_FOUND);
         }
+       
+       // validasi respom ID sukses di update
         else{
             productRepo.remove(id);
             product.setId(id);
@@ -71,17 +77,24 @@ public class ProductServiceController {
         }
         
     }
+   
+   // POST API (method untuk menambahkan data)
    @RequestMapping(value = "/products", method = RequestMethod.POST)
    public ResponseEntity<Object> createProduct(@RequestBody Product product) {
        
+       // validasi ID
        if(productRepo.containsKey(product.getId())){
             return new ResponseEntity<>("Product id cannot be the same, please check again", HttpStatus.OK);
         }
+       
+       // validasi respon ID sukses di buat
         else{
             productRepo.put(product.getId(), product);
             return new ResponseEntity<>("Product is created Successfully", HttpStatus.CREATED);
         }
     }
+   
+   // GET API
    @RequestMapping(value = "/products")
    public ResponseEntity<Object> getProduct() {
       return new ResponseEntity<>(productRepo.values(), HttpStatus.OK);
